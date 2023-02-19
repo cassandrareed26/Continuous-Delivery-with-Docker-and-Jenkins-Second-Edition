@@ -35,6 +35,7 @@ podTemplate(containers: [
                     } catch (Exception E) {
                         echo 'Failure detected'
                     }
+               }
                     
                  stage("Checkstyle Test") {
                     try {
