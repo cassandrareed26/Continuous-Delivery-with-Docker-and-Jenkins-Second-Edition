@@ -7,4 +7,4 @@ Feature: Calculator
    Scenario: Divide two numbers
      Given I divide two numbers: 6 and 2
      When the calculator divides them
-     Then I receive 3 as a result
+     Then I receive a 3 as a result
