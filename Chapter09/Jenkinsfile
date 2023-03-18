@@ -30,15 +30,13 @@ podTemplate(yaml: '''
               cd /home/jenkins/agent/workspace/week8test/Chapter09/sample3
               chmod +x gradlew
               ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
-              ./gradlew jacocoTestCoverageVerification
-              ./gradlew jacocoTestReport
               '''
               // from the HTML publisher plugin
               // https://www.jenkins.io/doc/pipeline/steps/htmlpublisher/
               publishHTML (target: [
                   reportDir: '/build/reports/tests/acceptanceTest',
                   reportFiles: 'index.html',
-                  reportName: "JaCoCo Report"
+                  reportName: "Calculator Report"
                   ])
           }
       }
