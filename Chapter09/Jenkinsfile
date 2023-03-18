@@ -22,12 +22,25 @@ podTemplate(yaml: '''
           ./gradlew build
           curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/apis/apps/v1/namespaces/default/deployments -XPOST -H "Content-type: application/yaml" --data-binary @hazelcast.yaml
           curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/apis/apps/v1/namespaces/default/deployments -XPOST -H "Content-type: application/yaml" --data-binary @calculator.yaml
-          pwd
-          cd /home/jenkins/agent/workspace/week8test/Chapter09/sample3
-          chmod +x gradlew
-          ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
           '''
         }
+          stage('run tests') {
+              sh '''
+              pwd
+              cd /home/jenkins/agent/workspace/week8test/Chapter09/sample3
+              chmod +x gradlew
+              ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
+              ./gradlew jacocoTestCoverageVerification
+              ./gradlew jacocoTest Report
+              '''
+              // from the HTML publisher plugin
+              // https://www.jenkins.io/doc/pipeline/steps/htmlpublisher/
+              publishHTML (target: [
+                  reportDir: '/build/reports/tests/acceptanceTest/index.html',
+                  reportFiles: 'index.html',
+                  reportName: "JaCoCo Report"
+                  ])
+          }
       }
     }
   }
