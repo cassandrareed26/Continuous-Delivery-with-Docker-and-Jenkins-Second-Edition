@@ -5,6 +5,6 @@ Feature: Calculator
     Then I receive 3 as a result
     
    Scenario: Divide two numbers
-     Given I have two numbers to divide: 1 and 2
+     Given I have dividend and divisor: 6 and 3
      When the calculator divides them
-     Then I receive a 3 as a result
+     Then I receive a 2 as the quotient
