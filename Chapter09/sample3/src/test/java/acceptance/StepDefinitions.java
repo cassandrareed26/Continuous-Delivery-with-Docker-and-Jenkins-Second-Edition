@@ -46,8 +46,8 @@ public class StepDefinitions {
         result = restTemplate.getForObject(url, String.class);
     }
 
-    @Then("^I receive (.*) as a result$")
-    public void i_receive_a_result(String expectedResult) throws Throwable {
+    @Then("^I receive (.*) as the quotient$")
+    public void i_receive_a_quotient(String expectedResult) throws Throwable {
         assertEquals(expectedResult, result);
     }
 }
