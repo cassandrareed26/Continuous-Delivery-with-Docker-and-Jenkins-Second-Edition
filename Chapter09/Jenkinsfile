@@ -31,7 +31,7 @@ podTemplate(yaml: '''
               chmod +x gradlew
               ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
               ./gradlew jacocoTestCoverageVerification
-              ./gradlew jacocoTest Report
+              ./gradlew jacocoTestReport
               '''
               // from the HTML publisher plugin
               // https://www.jenkins.io/doc/pipeline/steps/htmlpublisher/
