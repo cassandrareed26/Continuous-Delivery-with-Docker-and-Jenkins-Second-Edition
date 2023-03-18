@@ -36,7 +36,7 @@ podTemplate(yaml: '''
               // from the HTML publisher plugin
               // https://www.jenkins.io/doc/pipeline/steps/htmlpublisher/
               publishHTML (target: [
-                  reportDir: '/build/reports/tests/acceptanceTest/index.html',
+                  reportDir: '/build/reports/tests/acceptanceTest',
                   reportFiles: 'index.html',
                   reportName: "JaCoCo Report"
                   ])
