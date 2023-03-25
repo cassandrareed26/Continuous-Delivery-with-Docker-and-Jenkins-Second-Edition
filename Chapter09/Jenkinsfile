@@ -51,6 +51,7 @@ node(POD_LABEL) {
           ./kubectl apply -f calculator.yaml
           ./kubectl apply -f hazelcast.yaml
           '''  
+        }
       }
     }
 }
