@@ -40,7 +40,7 @@ node(POD_LABEL) {
           kubectl get ns
           cd Chapter08/sample1
           chmod +x gradlew
-          ./gradelw smokeTest
+          ./gradlew smokeTest
           '''
         }
       }
