@@ -27,7 +27,7 @@ podTemplate(yaml: '''
           sleep 20
           ./kubectl apply -f calculator.yaml
           ./kubectl apply -f hazelcast.yaml
-          sleep 30
+          sleep 45
           '''
         }
         stage('run tests') {
