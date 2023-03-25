@@ -28,6 +28,7 @@ podTemplate(yaml: '''
 ''') {
 node(POD_LABEL) {
     stage('Deploying to prod') {
+      git 'https://github.com/cassandrareed26/Continuous-Delivery-with-Docker-and-Jenkins-Second-Edition.git'
       container('cloud-sdk') {
         stage('Build a gradle project') {
           sh '''
@@ -37,6 +38,9 @@ node(POD_LABEL) {
           gcloud auth login --cred-file=$GOOGLE_APPLICATION_CREDENTIALS
           echo 'namespaces in the prod environment'
           kubectl get ns
+          cd Chapter08/sample1
+          chmod +x gradlew
+          ./gradelw smokeTest
           '''
         }
       }
