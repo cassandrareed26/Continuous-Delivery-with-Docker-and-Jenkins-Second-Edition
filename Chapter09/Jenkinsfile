@@ -21,6 +21,7 @@ podTemplate(yaml: '''
           chmod +x gradlew
           curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/apis/apps/v1/namespaces/default/deployments -XPOST -H "Content-type: application/yaml" --data-binary @hazelcast.yaml
           curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/apis/apps/v1/namespaces/default/deployments -XPOST -H "Content-type: application/yaml" --data-binary @calculator.yaml
+          ./gradlew smokeTest
           '''
         }
           stage('run tests') {
@@ -28,7 +29,7 @@ podTemplate(yaml: '''
               pwd
               cd /home/jenkins/agent/workspace/week9hw/Chapter09/sample3
               chmod +x gradlew
-              ./gradlew smokeTest
+              test $(curl calculator-service:8080/sum?a=6\\&b=2) -eq 8 && echo 'pass' || 'fail'
               '''
           }
       }
