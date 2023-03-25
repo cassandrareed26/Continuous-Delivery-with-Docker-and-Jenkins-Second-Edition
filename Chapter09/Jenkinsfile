@@ -21,9 +21,13 @@ podTemplate(yaml: '''
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x ./kubectl
           ./kubectl delete deployment calculator-deployment
+          ./kubectl delete service calculator-service
           ./kubectl delete deployment hazelcast
+          ./kubectl delete service hazelcast
+          sleep 20
           ./kubectl apply -f calculator.yaml
           ./kubectl apply -f hazelcast.yaml
+          sleep 30
           '''
         }
         stage('run tests') {
