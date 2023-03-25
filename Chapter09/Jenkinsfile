@@ -19,7 +19,6 @@ podTemplate(yaml: '''
           sh '''
           cd Chapter08/sample1
           chmod +x gradlew
-          ./gradlew build
           curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/apis/apps/v1/namespaces/default/deployments -XPOST -H "Content-type: application/yaml" --data-binary @hazelcast.yaml
           curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/apis/apps/v1/namespaces/default/deployments -XPOST -H "Content-type: application/yaml" --data-binary @calculator.yaml
           '''
@@ -27,17 +26,10 @@ podTemplate(yaml: '''
           stage('run tests') {
               sh '''
               pwd
-              cd /home/jenkins/agent/workspace/week8test/Chapter09/sample3
+              cd /home/jenkins/agent/workspace/week9hw/Chapter09/sample3
               chmod +x gradlew
-              ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
+              ./gradlew smokeTest
               '''
-              // from the HTML publisher plugin
-              // https://www.jenkins.io/doc/pipeline/steps/htmlpublisher/
-              publishHTML (target: [
-                  reportDir: 'Chapter09/sample3/build/reports/tests/acceptanceTest',
-                  reportFiles: 'index.html',
-                  reportName: "Calculator Report"
-                  ])
           }
       }
     }
